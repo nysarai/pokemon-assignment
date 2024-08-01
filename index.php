@@ -1,3 +1,9 @@
+<?php
+$pokemon = file_get_contents("data.json");
+$data = json_decode($pokemon,true);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +22,15 @@
     <div class="mt-4 mb-5 d-flex justify-content-between align-items-center">
       <h1 class="text-white">Get your Pokemon!</h1>
       <div>
-        <button class="btn btn-primary">
+      <button type="button" class="btn btn-link">
+      <i class="fa fa-question-circle" aria-hidden="true"></i> Help?
+    </button> 
+
+        <button class="btn btn-outline-primary">
           <i class="fa fa-sign-in"></i> Login</button>
+        <button class="btn btn-primary">
+          <i class="fa fa-user-plus" aria-hidden="true"></i> Signup</button>
+          
       </div>
     </div>
     <table class="table table-dark">
@@ -33,8 +46,22 @@
         </tr>
       </thead>
       <tbody>
+      <?php foreach($data as $element):?>
+      <tr>
 
-        <!-- Write your code here -->
+      <td><img src = "<?php echo $element["image"]["thumbnail"]?>"></td>
+      <td><?php echo $element["name"] ["english"]?></td>
+      <td><?php echo $element ["species"];?></td>
+      <td><?php echo $element ["description"]?></td>
+      <td><?php echo $element ["profile"]["weight"]?></td>
+      <td><?php echo $element ["profile"]["height"]?></td>
+      <td><div>
+        <button class="btn btn-outline-warning">
+          <i class="fa fa-gift" aria-hidden="true"></i> COLLECT</button>
+      </div></td>
+
+    </tr>
+      <?php endforeach; ?>
       </tbody>
     </table>
 
